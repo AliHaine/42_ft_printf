@@ -63,7 +63,7 @@ int		ft_atoi(const char *src);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_itoa(int n);
+int     ft_itoa(int n);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -83,8 +83,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_printf(const char *, ...);
-char	*ft_itoa_unsigned(unsigned int);
+int     ft_itoa_unsigned(unsigned int);
 char	isconvchar(char);
-char	*convert_to_basesix(int, short);
+int     convert_to_basesix(long long int, short);
 
 #endif

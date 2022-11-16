@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-static char	*convertor_lower(int i, int size)
+static void convertor_lower(int i, int size)
 {
 	char	*dst;
 	short tmp;
@@ -21,7 +21,7 @@ static char	*convertor_lower(int i, int size)
 		size++;
 	dst = (char *)malloc(((int) size) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return ;
 	dst[(size)] = '\0';
 	size--;
 	while (size > 0)
@@ -35,10 +35,11 @@ static char	*convertor_lower(int i, int size)
 		i /= 16;
 	}
 	dst[size] = i + '0';
-	return (dst);
+    ft_putstr(dst);
+    free(dst);
 }
 
-static char	*convertor_upper(int i, int size)
+static void convertor_upper(int i, int size)
 {
 	char	*dst;
 	short	tmp;
@@ -47,7 +48,7 @@ static char	*convertor_upper(int i, int size)
 		size++;
 	dst = (char *)malloc(((int) size) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return ;
 	dst[(size)] = '\0';
 	size--;
 	while (size > 0)
@@ -61,13 +62,47 @@ static char	*convertor_upper(int i, int size)
 		i /= 16;
 	}
 	dst[size] = (i % 16) + '0';
-	return (dst);
+    ft_putstr(dst);
+    free(dst);
 }
 
-char	*convert_to_basesix(int n, short s)
+static void convertor_adress(int i, int size)
+{
+    char	*dst;
+    short	tmp;
+
+    if (size == 0)
+        size++;
+    dst = (char *)malloc(((int) size) * sizeof(char));
+    if (dst == NULL)
+        return ;
+    dst[(size)] = '\0';
+    size--;
+    while (size > 0)
+    {
+        if (size < 3)
+        {
+            dst[size - 1] = 'x';
+            dst[size - 2] = '0';
+            break;
+        }
+        tmp = (i % 16);
+        if (tmp > 9)
+            dst[size] = (tmp + 7) + '0';
+        else
+            dst[size] = tmp + '0';
+        size--;
+        i /= 16;
+    }
+    dst[size] = (i % 16) + '0';
+    ft_putstr(dst);
+    free(dst);
+}
+
+int convert_to_basesix(long long int n, short s)
 {
 	int					size;
-	unsigned int		i;
+	unsigned long long int		i;
 
 	size = 0;
 	i = n;
@@ -76,8 +111,16 @@ char	*convert_to_basesix(int n, short s)
 		i /= 10;
 		size++;
 	}
+    if (size == 0)
+    {
+        ft_putchar('0');
+        return (size + 1);
+    }
 	if (s == 0)
-		return (convertor_lower(n, size));
-	return (convertor_upper(n, size));
-
+        convertor_lower(n, size);
+    else if (s == 1)
+        convertor_upper(n, size);
+    else
+        convertor_adress(n, size);
+    return (size);
 }

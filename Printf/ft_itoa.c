@@ -12,31 +12,32 @@
 
 #include "../libft.h"
 
-static char	*maxminint(char *n, int i)
+static void maxminint(char *n, int i)
 {
 	char	*dst;
 
 	dst = NULL;
 	dst = (char *)malloc(((int) 12) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return ;
 	while (n[i])
 	{
 		dst[i] = n[i];
 		i++;
 	}
 	dst[i] = '\0';
-	return (dst);
+    ft_putstr(dst);
+    free(dst);
 }
 
-static char	*negatifint(int n, int size)
+static void negatifint(int n, int size)
 {
 	char	*dst;
 
 	dst = NULL;
 	dst = (char *)malloc(((int) size + 2) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return ;
 	dst[(size + 1)] = '\0';
 	while (size > 0)
 	{
@@ -45,17 +46,18 @@ static char	*negatifint(int n, int size)
 		n /= 10;
 	}
 	dst[size] = '-';
-	return (dst);
+    ft_putstr(dst);
+    free(dst);
 }
 
-static char	*positifint(int n, int size)
+static void positifint(int n, int size)
 {
 	char	*dst;
 
 	dst = NULL;
 	dst = (char *)malloc(((int) size + 1) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return ;
 	dst[(size)] = '\0';
 	size--;
 	while (size > 0)
@@ -65,10 +67,11 @@ static char	*positifint(int n, int size)
 		n /= 10;
 	}
 	dst[size] = n + '0';
-	return (dst);
+    ft_putstr(dst);
+    free(dst);
 }
 
-char	*ft_itoa(int n)
+int ft_itoa(int n)
 {
 	int		size;
 	int		i;
@@ -78,8 +81,10 @@ char	*ft_itoa(int n)
 	size = 1;
 	dst = NULL;
 	isnegat = 0;
-	if (n == -2147483648)
-		return (maxminint("-2147483648", 0));
+	if (n == -2147483648) {
+        maxminint("-2147483648", 0);
+        size = 10;
+    }
 	if (n < 0)
 	{
 		isnegat++;
@@ -92,7 +97,8 @@ char	*ft_itoa(int n)
 		size++;
 	}
 	if (isnegat == 0)
-		return (positifint(n, size));
+		positifint(n, size);
 	else
-		return (negatifint(n, size));
+		negatifint(n, size);
+    return (size);
 }
