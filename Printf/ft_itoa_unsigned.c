@@ -21,17 +21,25 @@ static void positifint(unsigned int n, int size)
     free(dst);
 }
 
-int ft_itoa_unsigned(unsigned int n)
+static int	get_size(int i)
 {
-	int					size;
-	unsigned int		i;
+	int	size;
 
-	size = 1;
-	i = n;
+	size = 0;
 	while (i > 9)
 	{
 		i /= 10;
 		size++;
 	}
+	return (size);
+}
+
+int ft_itoa_unsigned(unsigned int n)
+{
+	int					size;
+
+	size = 1;
+	size += get_size(n);
+	positifint(n, size);
 	return (size);
 }

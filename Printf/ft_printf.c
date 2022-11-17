@@ -41,17 +41,11 @@ static int intdndn(char args, va_list params)
 {
 	unsigned int	u;
     int				i;
-    double			d;
     int             len;
 
     i = 0;
-    d = 0;
     len = 0;
-    if (args == 'd')
-    {
-
-    }
-    else if (args == 'i')
+    if (args == 'i' || args == 'd')
     {
         i = va_arg(params, int);
         len = ft_itoa(i);
@@ -134,11 +128,11 @@ int ft_printf(const char *args, ...)
 
 int main(void)
 {
-    int i = 459;
+    int i = 1;
     int vl = 0;
     char c = 'a';
     char s[] = "salut";
-	printf("\nMy result = %d\n", ft_printf("salut a %p l", &s, 4));
+	printf("\nMy result = %i\n", ft_printf("salut a %i l", i, 4));
     vl = printf("salut a %p l\n", &s, 4);
     printf("Default result = %d", vl);
     return 0;

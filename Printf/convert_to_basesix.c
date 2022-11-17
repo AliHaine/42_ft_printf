@@ -17,21 +17,17 @@ static void convertor_lower(int i, int size)
 	char	*dst;
 	short tmp;
 
-	if (size == 0)
-		size++;
 	dst = (char *)malloc(((int) size) * sizeof(char));
 	if (dst == NULL)
 		return ;
 	dst[(size)] = '\0';
-	size--;
-	while (size > 0)
+	while (size-- > 0)
 	{
 		tmp = (i % 16);
 		if (tmp > 9)
 			dst[size] = (tmp + 39) + '0';
 		else
 			dst[size] = tmp + '0';
-		size--;
 		i /= 16;
 	}
 	dst[size] = i + '0';
@@ -44,21 +40,17 @@ static void convertor_upper(int i, int size)
 	char	*dst;
 	short	tmp;
 
-	if (size == 0)
-		size++;
 	dst = (char *)malloc(((int) size) * sizeof(char));
 	if (dst == NULL)
 		return ;
 	dst[(size)] = '\0';
-	size--;
-	while (size > 0)
+	while (size-- > 0)
 	{
 		tmp = (i % 16);
 		if (tmp > 9)
 			dst[size] = (tmp + 7) + '0';
 		else
 			dst[size] = tmp + '0';
-		size--;
 		i /= 16;
 	}
 	dst[size] = (i % 16) + '0';
@@ -71,14 +63,11 @@ static void convertor_adress(int i, int size)
     char	*dst;
     short	tmp;
 
-    if (size == 0)
-        size++;
     dst = (char *)malloc(((int) size) * sizeof(char));
     if (dst == NULL)
         return ;
     dst[(size)] = '\0';
-    size--;
-    while (size > 0)
+    while (size-- > 0)
     {
         if (size < 3)
         {
@@ -91,7 +80,6 @@ static void convertor_adress(int i, int size)
             dst[size] = (tmp + 7) + '0';
         else
             dst[size] = tmp + '0';
-        size--;
         i /= 16;
     }
     dst[size] = (i % 16) + '0';
@@ -101,7 +89,7 @@ static void convertor_adress(int i, int size)
 
 int convert_to_basesix(long long int n, short s)
 {
-	int					size;
+	int							size;
 	unsigned long long int		i;
 
 	size = 0;
@@ -113,7 +101,7 @@ int convert_to_basesix(long long int n, short s)
 	}
     if (size == 0)
     {
-        ft_putchar('0');
+        ft_putchar(n);
         return (size + 1);
     }
 	if (s == 0)

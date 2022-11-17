@@ -71,31 +71,36 @@ static void positifint(int n, int size)
     free(dst);
 }
 
+static int	get_size(int i)
+{
+	int	size;
+
+	size = 0;
+	while (i > 9)
+	{
+		i /= 10;
+		size++;
+	}
+	return (size);
+}
+
 int ft_itoa(int n)
 {
 	int		size;
-	int		i;
-	char	*dst;
 	short	isnegat;
 
 	size = 1;
-	dst = NULL;
 	isnegat = 0;
 	if (n == -2147483648) {
         maxminint("-2147483648", 0);
-        size = 10;
+        return (11);
     }
 	if (n < 0)
 	{
 		isnegat++;
 		n *= -1;
 	}
-	i = n;
-	while (i > 9)
-	{
-		i /= 10;
-		size++;
-	}
+	size += get_size(n);
 	if (isnegat == 0)
 		positifint(n, size);
 	else
