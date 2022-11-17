@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "ft_printf.h"
 
-static int cstrptype (char args, va_list params)
+static int	cstrptype(char args, va_list params)
 {
-    char c;
-    char *str;
+	char	c;
+	char	*str;
 
     if (args == 'c')
     {
         c = va_arg(params, int);
         ft_putchar(c);
-        return (1);
+		return (1);
     }
     else if (args == 's')
     {
@@ -29,28 +29,28 @@ static int cstrptype (char args, va_list params)
         ft_putstr(str);
         return (ft_strlen(((const char *)str)));
     }
-    else if (args == '%')
+    else
     {
         c = va_arg(params, int);
         ft_putchar(c);
-        return (1);
+		return (1);
     }
 }
 
-static int intdndn(char args, va_list params)
+static int	intdndn(char args, va_list params)
 {
 	unsigned int	u;
-    int				i;
-    int             len;
+	int				i;
+	int				len;
 
-    i = 0;
-    len = 0;
-    if (args == 'i' || args == 'd')
+	i = 0;
+	len = 0;
+	if (args == 'i' || args == 'd')
     {
         i = va_arg(params, int);
         len = ft_itoa(i);
     }
-    else if (args == 'u')
+    else
     {
 		u = va_arg(params, unsigned int);
 		len = ft_itoa_unsigned(u);
@@ -75,7 +75,7 @@ static int psixteen(char args, va_list params)
 		i = va_arg(params, int);
 		len = convert_to_basesix(i, 0);
 	}
-	else if (args == 'X')
+	else
 	{
 		i = va_arg(params, int);
 		len = convert_to_basesix(i, 1);
@@ -113,27 +113,35 @@ int ft_printf(const char *args, ...)
             if (isconvchar(args[i + 1]) != 0) {
                 len += definetype(args[i + 1], params);
                 i++;
-            } else
-                ft_putchar(args[i]);
-            len++;
+            }
+			else
+			{
+				ft_putchar(args[i]);
+				len++;
+			}
         }
-        else {
-            ft_putchar(args[i]);
-            len++;
-        }
-        i++;
+		else {
+			ft_putchar(args[i]);
+			len++;
+		}
+		i++;
 	}
-    return (len);
+	return (len);
 }
 
 int main(void)
 {
-    int i = 1;
+    //int i = 1;li
+	char q[] = "je try";
     int vl = 0;
-    char c = 'a';
-    char s[] = "salut";
-	printf("\nMy result = %i\n", ft_printf("salut a %i l", i, 4));
-    vl = printf("salut a %p l\n", &s, 4);
-    printf("Default result = %d", vl);
+    char c = '0';
+    char s[] = "salut a %p";
+
+	printf("---------------------------\n");
+	printf("\nMy result = %i\n", ft_printf(s, -1));
+	printf("---------------------------\n");
+    vl = printf(s, -1);
+    printf("\nDefault result = %d", vl);
+	printf("\n---------------------------");
     return 0;
 }

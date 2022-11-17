@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 10:51:52 by ayagmur           #+#    #+#             */
-/*   Updated: 2022/11/01 10:51:54 by ayagmur          ###   ########.fr       */
+/*   Created: 2022/11/15 12:53:06 by ayagmur           #+#    #+#             */
+/*   Updated: 2022/11/15 12:53:07 by ayagmur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../ft_printf.h"
 
-size_t	ft_strlen(const char *c)
+void	ft_putstr(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (c[i])
+	while (str[i])
+	{
+		write(1, &str[i], 1);
 		i++;
-	return (i);
+	}
 }

@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   isconvchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 12:52:54 by ayagmur           #+#    #+#             */
-/*   Updated: 2022/11/15 12:52:55 by ayagmur          ###   ########.fr       */
+/*   Created: 2022/11/15 12:59:24 by ayagmur           #+#    #+#             */
+/*   Updated: 2022/11/15 12:59:26 by ayagmur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../ft_printf.h"
 
-void ft_putchar(char c)
+char isconvchar(char args)
 {
-	write(1, &c, 1);
+	if (args == 'c' || args == 's' || args == 'p'
+		|| args == 'd' || args == 'i' || args == 'u'
+		|| args == 'x' || args == 'X' || args == '%')
+	{
+		return (args);
+	}
+	return (0);
 }

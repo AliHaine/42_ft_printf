@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../ft_printf.h"
 
 static void convertor_lower(int i, int size)
 {
@@ -40,7 +40,7 @@ static void convertor_upper(int i, int size)
 	char	*dst;
 	short	tmp;
 
-	dst = (char *)malloc(((int) size) * sizeof(char));
+	dst = (char *)malloc(((int) size + 1) * sizeof(char));
 	if (dst == NULL)
 		return ;
 	dst[(size)] = '\0';
@@ -58,31 +58,30 @@ static void convertor_upper(int i, int size)
     free(dst);
 }
 
-static void convertor_adress(int i, int size)
+static void convertor_adress(long long i, int size)
 {
     char	*dst;
     short	tmp;
 
-    dst = (char *)malloc(((int) size) * sizeof(char));
+    dst = (char *)malloc(((int) size + 1) * sizeof(char));
     if (dst == NULL)
         return ;
     dst[(size)] = '\0';
     while (size-- > 0)
     {
-        if (size < 3)
+        if (size < 2)
         {
-            dst[size - 1] = 'x';
-            dst[size - 2] = '0';
+            dst[size] = 'x';
+            dst[size - 1] = '0';
             break;
         }
         tmp = (i % 16);
         if (tmp > 9)
-            dst[size] = (tmp + 7) + '0';
+            dst[size] = (tmp + 39) + '0';
         else
             dst[size] = tmp + '0';
         i /= 16;
     }
-    dst[size] = (i % 16) + '0';
     ft_putstr(dst);
     free(dst);
 }
@@ -92,23 +91,26 @@ int convert_to_basesix(long long int n, short s)
 	int							size;
 	unsigned long long int		i;
 
-	size = 0;
+	size = 1;
 	i = n;
 	while (i > 9)
 	{
-		i /= 10;
+		i /= 16;
 		size++;
 	}
-    if (size == 0)
+    if (size == 1)
     {
         ft_putchar(n);
-        return (size + 1);
+        return (size);
     }
 	if (s == 0)
         convertor_lower(n, size);
     else if (s == 1)
         convertor_upper(n, size);
     else
-        convertor_adress(n, size);
+	{
+		convertor_adress(n, size + 2);
+		size += 2;
+	}
     return (size);
 }
