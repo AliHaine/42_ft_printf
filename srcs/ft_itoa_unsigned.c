@@ -33,7 +33,7 @@ static void	positifint(unsigned int n, int size)
 	free(dst);
 }
 
-static int	get_size(int i)
+static int	get_size(unsigned int i)
 {
 	int	size;
 

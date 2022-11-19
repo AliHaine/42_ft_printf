@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 16:12:04 by ayagmur           #+#    #+#             */
-/*   Updated: 2022/11/03 16:12:06 by ayagmur          ###   ########.fr       */
+/*   Created: 2022/11/19 12:43:10 by ayagmur           #+#    #+#             */
+/*   Updated: 2022/11/19 12:43:12 by ayagmur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 16:12:04 by ayagmur           #+#    #+#             */
-/*   Updated: 2022/11/14 16:44:42 by ayagmur          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -36,8 +24,8 @@ void	ft_putstr(char *);
 size_t	ft_strlen(const char *c);
 int		ft_printf(const char *, ...);
 int     ft_itoa_unsigned(unsigned int);
-int     ft_itoa(int);
+int		ft_itoa(int);
 char	isconvchar(char);
-int     convert_to_basesix(long long int, short);
+int		convert_to_basesix(unsigned long long int, short);
 
 #endif

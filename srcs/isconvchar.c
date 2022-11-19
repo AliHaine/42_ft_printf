@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-char isconvchar(char args)
+char	isconvchar(char args)
 {
 	if (args == 'c' || args == 's' || args == 'p'
 		|| args == 'd' || args == 'i' || args == 'u'
