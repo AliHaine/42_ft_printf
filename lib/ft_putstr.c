@@ -15,11 +15,14 @@
 void	ft_putstr(char *str)
 {
 	int	i;
+	size_t v;
 
 	i = 0;
 	while (str[i])
 	{
-		write(1, &str[i], 1);
+		v = write(1, &str[i], 1);
+		if (v == 0)
+			return (-1);
 		i++;
 	}
 }

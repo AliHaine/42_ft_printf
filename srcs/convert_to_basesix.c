@@ -38,7 +38,6 @@ static void	convertor_deci(unsigned long long int i, int size, short up)
 			dst[size] = tmp + '0';
 		i /= 16;
 	}
-	dst[size] = (i % 16) + '0';
 	ft_putstr(dst);
 	free(dst);
 }

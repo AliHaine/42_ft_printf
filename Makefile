@@ -20,6 +20,7 @@ SRCS =	ft_printf.c \
 		srcs/ft_itoa.c \
 		srcs/ft_itoa_unsigned.c \
 		srcs/isconvchar.c \
+		srcs/type_manager.c \
 		srcs/convert_to_basesix.c
 
 OBJS = ${SRCS:.c=.o}

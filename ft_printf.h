@@ -19,13 +19,14 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-void	ft_putchar(char);
-void	ft_putstr(char *);
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
 size_t	ft_strlen(const char *c);
-int		ft_printf(const char *, ...);
-int     ft_itoa_unsigned(unsigned int);
-int		ft_itoa(int);
-char	isconvchar(char);
-int		convert_to_basesix(unsigned long long int, short);
+int		ft_printf(const char *args, ...);
+int		ft_itoa_unsigned(unsigned int n);
+int		ft_itoa(int n);
+char	isconvchar(char args);
+int		definetype(char args, va_list params);
+int		convert_to_basesix(unsigned long long int n, short up);
 
 #endif
