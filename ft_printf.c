@@ -12,21 +12,48 @@
 
 #include "ft_printf.h"
 
-static int	process(va_list params, const char *args, int *i)
+static int	process(va_list params, const char *args)
 {
 	int	len;
 
-	len = 0;
 	if (isconvchar(args[1]) != 0)
 	{
-		len += definetype(args[1], params);
-		*i = *i + 1;
+		len = definetype(args[1], params);
+		if (len == -1)
+			return (-1);
 	}
 	else
 	{
-		ft_putchar(args[0]);
+		len = ft_putchar(args[0]);
+		if (len == -1)
+			return (-1);
 		len++;
 	}
+	return (len);
+}
+
+static int	pre_process(const char *args, va_list params, int *p)
+{
+	int	v;
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	if (args[i] == '%')
+	{
+		v = process(params, args + i);
+		*p = *p + 2;
+		len += v;
+	}
+	else
+	{
+		v = ft_putchar(args[i]);
+		*p = *p + 1;
+		len++;
+	}
+	if (v == -1)
+		return (-1);
 	return (len);
 }
 
@@ -34,7 +61,7 @@ int	ft_printf(const char *args, ...)
 {
 	int		i;
 	int		len;
-	int 	v;
+	int		v;
 	va_list	params;
 
 	i = 0;
@@ -42,25 +69,15 @@ int	ft_printf(const char *args, ...)
 	va_start(params, args);
 	while (args[i])
 	{
-		if (args[i] == '%')
-		{
-			v = process(params, args + i, &i);
-			if (v == -1)
-				return (-1);
-			len += v;
-		}
-		else
-		{
-			v = ft_putchar(args[i]);
-			if (v == -1)
-				return (-1);
-			len++;
-		}
-		i++;
+		v = pre_process(args + i, params, &i);
+		len += v;
+		if (v == -1)
+			return (-1);
 	}
 	va_end(params);
 	return (len);
 }
+
 /*
 int main(void)
 {
@@ -68,12 +85,12 @@ int main(void)
 	//char q[] = "null";
     int vl = 0;
     char c = '0';
-    char s[] = "salut a %x";
+    char s[] = "dada %s";
 
 	printf("---------------------------\n");
-	printf("\nMy result = %i\n", ft_printf(s, i));
+	printf("\nMy result = %i\n", ft_printf(s, "gagfagfadgaf"));
 	printf("---------------------------\n");
-    vl = printf(s, i);
+    vl = printf(s, "gagfagfadgaf");
     printf("\nDefault result = %d", vl);
 	printf("\n---------------------------");
     return 0;

@@ -15,12 +15,12 @@
 static int	positifint(unsigned int n, int size)
 {
 	char	*dst;
-	int 	v;
+	int		v;
 
 	dst = NULL;
 	dst = (char *)malloc(((int) size + 1) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return (-1);
 	dst[(size)] = '\0';
 	size--;
 	while (size > 0)
@@ -51,7 +51,7 @@ static int	get_size(unsigned int i)
 int	ft_itoa_unsigned(unsigned int n)
 {
 	int	size;
-	int v;
+	int	v;
 
 	size = 1;
 	size += get_size(n);

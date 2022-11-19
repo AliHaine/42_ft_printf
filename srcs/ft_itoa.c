@@ -12,9 +12,9 @@
 
 #include "../ft_printf.h"
 
-static int	maxminint()
+static int	maxminint(void)
 {
-	int 	v;
+	int		v;
 
 	v = ft_putstr("-2147483648");
 	if (v == -1)
@@ -25,12 +25,12 @@ static int	maxminint()
 static int	negatifint(int n, int size)
 {
 	char	*dst;
-	int 	v;
+	int		v;
 
 	dst = NULL;
 	dst = (char *)malloc(((int) size + 2) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return (-1);
 	dst[size + 1] = '\0';
 	while (size > 0)
 	{
@@ -49,12 +49,12 @@ static int	negatifint(int n, int size)
 static int	positifint(int n, int size)
 {
 	char	*dst;
-	int 	v;
+	int		v;
 
 	dst = NULL;
 	dst = (char *)malloc(((int) size + 1) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return (-1);
 	dst[size] = '\0';
 	size--;
 	while (size > 0)

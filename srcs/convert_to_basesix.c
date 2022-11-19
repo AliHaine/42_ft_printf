@@ -26,11 +26,11 @@ static int	convertor_char(unsigned long long int i, short up)
 static int	convertor_deci(unsigned long long int i, int size, short up)
 {
 	char	*dst;
-	short	tmp;
+	int		tmp;
 
 	dst = (char *)malloc((sizeof(char) * (int) size + 1));
 	if (dst == NULL)
-		return (0);
+		return (-1);
 	dst[size] = '\0';
 	while (size-- > 0)
 	{
@@ -49,11 +49,11 @@ static int	convertor_deci(unsigned long long int i, int size, short up)
 static int	convertor_adress(unsigned long long int i, int size)
 {
 	char	*dst;
-	short	tmp;
+	int		tmp;
 
 	dst = (char *)malloc(((int) size + 1) * sizeof(char));
 	if (dst == NULL)
-		return (0);
+		return (-1);
 	dst[size] = '\0';
 	while (size-- > 0)
 	{
@@ -91,7 +91,7 @@ static int	get_size(unsigned long long int val, short up)
 int	convert_to_basesix(unsigned long long int n, short up)
 {
 	int	size;
-	int v;
+	int	v;
 
 	size = get_size(n, up);
 	if (size == 1 && up != 0)

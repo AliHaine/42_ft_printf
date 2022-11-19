@@ -15,7 +15,7 @@
 static int	perchar(char args, va_list params)
 {
 	char	c;
-	int 	v;
+	int		v;
 
 	if (args == 'c')
 	{
@@ -32,7 +32,7 @@ static int	perchar(char args, va_list params)
 static int	cstrptype(va_list params)
 {
 	char	*str;
-	int 	v;
+	int		v;
 
 	str = va_arg(params, char *);
 	if (str == NULL)

@@ -14,8 +14,8 @@
 
 int	ft_putstr(char *str)
 {
-	int	i;
-	size_t v;
+	int		i;
+	size_t	v;
 
 	i = 0;
 	while (str[i])
