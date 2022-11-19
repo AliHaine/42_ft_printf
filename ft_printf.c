@@ -77,21 +77,3 @@ int	ft_printf(const char *args, ...)
 	va_end(params);
 	return (len);
 }
-
-/*
-int main(void)
-{
-    unsigned long long int i = 42;
-	//char q[] = "null";
-    int vl = 0;
-    char c = '0';
-    char s[] = "dada %s";
-
-	printf("---------------------------\n");
-	printf("\nMy result = %i\n", ft_printf(s, "gagfagfadgaf"));
-	printf("---------------------------\n");
-    vl = printf(s, "gagfagfadgaf");
-    printf("\nDefault result = %d", vl);
-	printf("\n---------------------------");
-    return 0;
-}*/
