@@ -12,30 +12,40 @@
 
 #include "../ft_printf.h"
 
-static int	cstrptype(char args, va_list params)
+static int	perchar(char args, va_list params)
 {
 	char	c;
-	char	*str;
+	int 	v;
 
 	if (args == 'c')
 	{
 		c = va_arg(params, int);
-		ft_putchar(c);
-		return (1);
+		v = ft_putchar(c);
 	}
-	else if (args == 's')
-	{
-		str = va_arg(params, char *);
-		if (str == NULL)
-		{
-			ft_putstr("(null)");
-			return (6);
-		}
-		ft_putstr(str);
-		return (ft_strlen(((const char *)str)));
-	}
-	ft_putchar('%');
+	else
+		v = ft_putchar('%');
+	if (v == -1)
+		return (-1);
 	return (1);
+}
+
+static int	cstrptype(va_list params)
+{
+	char	*str;
+	int 	v;
+
+	str = va_arg(params, char *);
+	if (str == NULL)
+	{
+		v = ft_putstr("(null)");
+		if (v == -1)
+			return (-1);
+		return (6);
+	}
+	v = ft_putstr(str);
+	if (v == -1)
+		return (-1);
+	return (ft_strlen(((const char *)str)));
 }
 
 static int	intdndn(char args, va_list params)
@@ -88,11 +98,13 @@ int	definetype(char args, va_list params)
 	int	len;
 
 	len = 0;
-	if (args == 'c' || args == 's' || args == '%')
-		len += cstrptype(args, params);
+	if (args == 's')
+		len += cstrptype(params);
 	else if (args == 'd' || args == 'i' || args == 'u')
 		len += intdndn(args, params);
 	else if (args == 'p' || args == 'x' || args == 'X')
 		len += psixteen(args, params);
+	else if (args == 'c' || args == '%')
+		len += perchar(args, params);
 	return (len);
 }

@@ -12,14 +12,15 @@
 
 #include "../ft_printf.h"
 
-static void	positifint(unsigned int n, int size)
+static int	positifint(unsigned int n, int size)
 {
 	char	*dst;
+	int 	v;
 
 	dst = NULL;
 	dst = (char *)malloc(((int) size + 1) * sizeof(char));
 	if (dst == NULL)
-		return ;
+		return (0);
 	dst[(size)] = '\0';
 	size--;
 	while (size > 0)
@@ -29,8 +30,9 @@ static void	positifint(unsigned int n, int size)
 		n /= 10;
 	}
 	dst[size] = n + '0';
-	ft_putstr(dst);
+	v = ft_putstr(dst);
 	free(dst);
+	return (v);
 }
 
 static int	get_size(unsigned int i)
@@ -48,10 +50,13 @@ static int	get_size(unsigned int i)
 
 int	ft_itoa_unsigned(unsigned int n)
 {
-	int					size;
+	int	size;
+	int v;
 
 	size = 1;
 	size += get_size(n);
-	positifint(n, size);
+	v = positifint(n, size);
+	if (v == -1)
+		return (-1);
 	return (size);
 }

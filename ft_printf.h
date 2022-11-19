@@ -19,8 +19,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
+int		ft_putchar(char c);
+int		ft_putstr(char *str);
 size_t	ft_strlen(const char *c);
 int		ft_printf(const char *args, ...);
 int		ft_itoa_unsigned(unsigned int n);

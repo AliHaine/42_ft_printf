@@ -12,22 +12,25 @@
 
 #include "../ft_printf.h"
 
-static void	convertor_char(unsigned long long int i, short up)
+static int	convertor_char(unsigned long long int i, short up)
 {
+	int	v;
+
 	if (i > 9)
-		ft_putchar((i + up) + '0');
+		v = ft_putchar((i + up) + '0');
 	else
-		ft_putchar(i + '0');
+		v = ft_putchar(i + '0');
+	return (v);
 }
 
-static void	convertor_deci(unsigned long long int i, int size, short up)
+static int	convertor_deci(unsigned long long int i, int size, short up)
 {
 	char	*dst;
 	short	tmp;
 
 	dst = (char *)malloc((sizeof(char) * (int) size + 1));
 	if (dst == NULL)
-		return ;
+		return (0);
 	dst[size] = '\0';
 	while (size-- > 0)
 	{
@@ -38,18 +41,19 @@ static void	convertor_deci(unsigned long long int i, int size, short up)
 			dst[size] = tmp + '0';
 		i /= 16;
 	}
-	ft_putstr(dst);
+	tmp = ft_putstr(dst);
 	free(dst);
+	return (tmp);
 }
 
-static void	convertor_adress(unsigned long long int i, int size)
+static int	convertor_adress(unsigned long long int i, int size)
 {
 	char	*dst;
 	short	tmp;
 
 	dst = (char *)malloc(((int) size + 1) * sizeof(char));
 	if (dst == NULL)
-		return ;
+		return (0);
 	dst[size] = '\0';
 	while (size-- > 0)
 	{
@@ -64,8 +68,9 @@ static void	convertor_adress(unsigned long long int i, int size)
 	}
 	dst[size] = 'x';
 	dst[size - 1] = '0';
-	ft_putstr(dst);
+	tmp = ft_putstr(dst);
 	free(dst);
+	return (tmp);
 }
 
 static int	get_size(unsigned long long int val, short up)
@@ -86,19 +91,24 @@ static int	get_size(unsigned long long int val, short up)
 int	convert_to_basesix(unsigned long long int n, short up)
 {
 	int	size;
+	int v;
 
 	size = get_size(n, up);
 	if (size == 1 && up != 0)
 	{
-		convertor_char(n, up);
+		v = convertor_char(n, up);
+		if (v == -1)
+			return (-1);
 		return (size);
 	}
 	if (up == 39 || up == 7)
-		convertor_deci(n, size, up);
+		v = convertor_deci(n, size, up);
 	else
 	{
-		convertor_adress(n, size + 2);
+		v = convertor_adress(n, size + 2);
 		size += 2;
 	}
+	if (v == -1)
+		return (-1);
 	return (size);
 }

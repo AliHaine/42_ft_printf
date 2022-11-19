@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-void	ft_putstr(char *str)
+int	ft_putstr(char *str)
 {
 	int	i;
 	size_t v;
@@ -21,8 +21,9 @@ void	ft_putstr(char *str)
 	while (str[i])
 	{
 		v = write(1, &str[i], 1);
-		if (v == 0)
+		if (((int )v) == -1)
 			return (-1);
 		i++;
 	}
+	return (0);
 }

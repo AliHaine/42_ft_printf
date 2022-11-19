@@ -34,6 +34,7 @@ int	ft_printf(const char *args, ...)
 {
 	int		i;
 	int		len;
+	int 	v;
 	va_list	params;
 
 	i = 0;
@@ -42,10 +43,17 @@ int	ft_printf(const char *args, ...)
 	while (args[i])
 	{
 		if (args[i] == '%')
-			len += process(params, args + i, &i);
+		{
+			v = process(params, args + i, &i);
+			if (v == -1)
+				return (-1);
+			len += v;
+		}
 		else
 		{
-			ft_putchar(args[i]);
+			v = ft_putchar(args[i]);
+			if (v == -1)
+				return (-1);
 			len++;
 		}
 		i++;
